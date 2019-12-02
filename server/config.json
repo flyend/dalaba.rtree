@@ -1,0 +1,30 @@
+{
+    "global": {
+        "root": "./",
+        "cacheDir": ".cache",
+        "debug": false
+    },
+    "task": {
+        "server": {
+            "port": 3030,
+            "fallback": "./index.html"
+        },
+        "rtree": {
+            "src": {
+                "entriesJs": ["src/dalaba.rtree.js"],
+                "watches": [
+                    "src/*.js",
+                    "!src/**/index.js"
+                ],
+                "html": "index.html"
+            },
+            "dest": {
+                "jsPath": "dist",
+                "jsFile": "dalaba.rtree.js"
+            },
+            "reload": {
+                "target": ["index.html"]
+            }
+        }
+    }
+}

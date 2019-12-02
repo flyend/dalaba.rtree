@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+        <title>R-Tree</title>
+        <style type="text/css">
+            #vis {position: absolute; left: 0; right: 0; top: 0; bottom: 0;}
+        </style>
+        <script type="text/javascript" src="/dist/dalaba.js"></script>
+        <script type="text/javascript" src="/dist/dalaba.rtree.js"></script>
+    </head>
+    <body>
+        <div id="vis"></div>
+        <script type="text/javascript">
+            var vis = document.getElementById("vis");
+            var tree = new Dalaba.geom.RTree;
+
+            var maxX = 760;
+            var maxY = 450;
+            var minWidth = 120;
+            var minHeight = 120;
+            
+            var points = [];
+
+            for (var i = 0; i < 20; i++) {
+                var data = { data: i };
+                data.x = Math.floor(Math.random() * (maxX - minWidth));
+                data.y = Math.floor(Math.random() * (maxY - minHeight));
+                data.width = Math.min(minWidth + 10, Math.floor(Math.random() * (maxX - data.x)) + minWidth);
+                data.height = Math.min(minHeight + 10, Math.floor(Math.random() * (maxY - data.y)) + minHeight);
+                points.push(data);
+                tree.insert(data);
+            }
+
+            vis.innerHTML = `
+                ${points.map(function (d) {
+                    return `<div id="${d.data}" style="position:absolute;left:${d.x}px; top:${d.y}px; width:${d.width}px; height:${d.height}px; border:1px solid #ccc; text-align:center;">
+                        <p>${d.data}</p>
+                    </div>`;
+                }).join("")}
+            `;
+            vis.addEventListener("click", function (e) {
+                var bbox = this.getBoundingClientRect();
+                var x = e.clientX - bbox.left,
+                    y = e.clientY - bbox.top;
+                var nodes = tree.search({x: x, y: y});
+                //console.log(nodes);
+                // reset
+                points.forEach(function (node) {
+                    document.getElementById(node.data).style.border = `1px solid #ccc`;
+                });
+                nodes.forEach(function (node) {
+                    document.getElementById(node.data).style.border = `1px solid #f0f`;
+                });
+            });
+        </script>
+    </body>
+</html>

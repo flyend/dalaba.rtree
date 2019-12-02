@@ -1,0 +1,103 @@
+p { margin: 0; padding: 0}
+ul {padding: 0;}
+
+.dalaba-tree { width: 220px; min-width: 220px; height: 100%; min-height: 350px; position: relative; user-select: none; overflow:hidden; border-bottom: 1px solid #2196F3; }
+.dalaba-tree-root {padding: 1px 1px 1px 1px; user-select: none; overflow: auto; position: absolute; top: 30px; left: 0; right: 0; bottom: 27px;}
+.dalaba-tree-container {position: relative; height: 100%;}
+.dalaba-tree-header { }
+.dalaba-tree-header h2 {margin: 0; height: 30px; line-height: 30px; font-size: 12px; font-weight: normal; padding-left: 0.7rem;}
+.tree-node { padding: 0;}
+
+.tree-icon { width: 20px; height: 20px; font-size: 0;vertical-align: top; display: block; float: left; }
+.tree-icon-type { width: 16px; height: 16px; margin: 5px 2px 0 0px;}
+
+.dalaba-tree-panel .dalaba-tree-name.actived {box-shadow: 0 0 0 1px rgba(7, 152, 236, .915); }
+.dalaba-tree-panel .dalaba-tree-name.actived p b{ /*font-weight: bold;*/}
+.tree-expanded { margin-top: 8px; color: #c0c4cc; font-size: 0; transform: rotate(90deg); transition: transform .3s ease-in-out;-webkit-font-smoothing: antialiased;}
+
+.tree-expanded, .tree-icon-type {display: block; float: left;}
+
+.tree-expanded .tree-icon { width: 10px; height: 10px;}
+.dalaba-tree-name{cursor: default; height: 28px; line-height: 28px; position: relative;}
+.dalaba-tree-name p { width: 180px;font-size: 12px;position: relative; padding: 0; margin: 0; padding-right: 5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
+.dalaba-tree-name p b{ font-weight: 200; }
+
+.tree-node .tree-leaf, .tree-node .tree-node { /*display: none; */}
+.expanded .tree-leaf, .expanded .tree-node { /*display: block;*/}
+.tree-node.expanded .tree-expanded {transform: rotate(180deg);}
+.dalaba-tree-panel { transition: 0.3s height ease-in-out, 0.3s padding-top ease-in-out, 0.3s padding-bottom ease-in-out;}
+.dalaba-tree-panel .dalaba-tree-name .tree-editor {position: absolute;top:2px;right: 10px; z-index: 99; background-color: #191a2c; }
+.dalaba-tree-panel .dalaba-tree-name .tree-icon-visible, .dalaba-tree-panel .dalaba-tree-name .tree-icon-rename, .dalaba-tree-panel .dalaba-tree-name .tree-icon-lock {
+    width: 16px; height: 16px; font-size: 0; display: none; margin: 4px 0 0 4px;
+}
+.dalaba-tree-panel .dalaba-tree-name .tree-icon-visible {
+    --opacity: 0;
+    --visibleColor: #fff;
+}
+.dalaba-tree-panel .dalaba-tree-hide .tree-icon-visible {
+    --opacity: 0.4;
+}
+.tree-icon-type .tree-icon-group { stroke: #fff;}
+.dalaba-tree-hide .tree-icon-group { stroke: #e0dada5e; }
+.tree-icon-type .tree-icon-groupopen { --treeGroupopenFill: #fff;}
+.dalaba-tree-hide .tree-icon-groupopen { --treeGroupopenFill: #e0dada5e; }
+.tree-icon-type .tree-icon-column { --treeLayerFill: #fff;}
+.dalaba-tree-hide .tree-icon-column { --treeLayerFill: #e0dada5e; }
+
+.dalaba-tree-panel .tree-hover .tree-icon-visible, .dalaba-tree-panel .dalaba-tree-name .tree-icon-visible.visibled, .dalaba-tree-panel .tree-hover .tree-icon-rename, .dalaba-tree-panel .tree-hover .tree-icon-lock {
+    display: inline-block;
+}
+
+/* 拖动状态 */
+.dragging .dalaba-tree-panel .tree-hover .tree-icon-visible, .dragging .dalaba-tree-panel .tree-hover .tree-icon-rename {
+    display: none;
+}
+#nodeRename {position: absolute;top: 0;left: 13px;height: 22px;padding: 0;margin: 0;border: 1px solid #2d59d8; display: none;}
+.dalaba-tree-name #nodeRename {display: block;}
+.dalaba-tree-name.dalaba-tree-hide { color: #e0dada5e;  }
+.dalaba-tree-hide .tree-editor .tree-icon-visible, .dalaba-tree-locked .tree-editor .tree-icon-lock { display: inline-block; }
+
+.dalaba-tree-root > .dalaba-tree-name { height: 30px; line-height: 30px; display: none; background-color: #1C2139; }
+.dalaba-tree-root > .dalaba-tree-name p { padding-left: 5px; }
+.dalaba-tree-root > .dalaba-tree-name .tree-expanded {right: 9px; left: auto;}
+.dalaba-tree-root > .dalaba-tree-name p .tree-icon-type { display: none; }
+
+.dalaba-tree-insert-overlay {position: absolute; background-color: #19161680; z-index: 4;}
+.dalaba-tree-draggable-layer {position: absolute; left:-999em; top:-999em; z-index: 2; }
+.dalaba-tree-draggable-layer .dalaba-tree-name {border: 1px dashed #2196F3; background-color: #0e0d0e; width: 50px; padding: 0 9px; white-space: nowrap;}
+.dalaba-tree-draggable-layer .tree-expanded {display: none;}
+.dalaba-tree-draggable-layer .tree-editor { display: none; }
+.dalaba-tree-draggable-layer .dalaba-tree-name p b {margin: 0 5px;}
+.dalaba-tree-bar { border: 1px solid #909; position: absolute; top:-999em; width: 283px; display: none; z-index: 3;}
+.dragging .tree-hover {background-color:#aaa2b147;/*border: 1px solid #2196F3;*/}
+.dragging .tree-hover .tree-editor { display: none; }
+.inserting .tree-layer {}
+.inserting .dalaba-tree-bar {display: block;}
+.inserting .tree-hover {background-color: inherit;/*border: 1px solid #fff;*/ }
+
+.dalaba-button-group.dalaba-tree-toolbar { text-align: center; width: 220px;}
+.dalaba-button-group button { padding: 0; text-indent: -9999em; background: none; border: none; --treeToolbarFill: #2B79FF;}
+.dalaba-button-group button:disabled, .dalaba-button-group button[disabled] {
+    --treeToolbarFill: #636161;
+}
+/* dalaba-painter */
+.dalaba-painter { height: calc(100% - 2px); display: -webkit-box; display: -moz-box; display: -ms-flexbox; display: -webkit-flex; display: flex;}
+
+/* dalaba-panel */
+.dalaba-panel { width: 100%; height: 100%; overflow: hidden; position: relative; border-bottom: 1px solid #2196F3; background-color: #23263b }
+.dalaba-panel-container {position: absolute; left: 20px; top: 20px; transform: matrix(1, 0, 0, 1, 0, 0);}
+.dalaba-panel .dalaba-shadow-component { position: absolute; text-align: center; }
+/* dalaba-toolbar */
+.dalaba-toolbar { height: 25px; background-color: hsl(237, 28%, 14%);display: flex; position: absolute; bottom: 0; left: 0; right: 0; z-index: 2; border-top: 1px solid hsla(220, 73%, 61%, 0.15);}
+/* dalaba tab */
+.dalaba-tab {width: 50%; height: 100%; display: flex; /*border: 1px solid hsl(187, 100%, 42%);*/}
+.dalaba-tab-container { height: 100%; overflow-x: auto; overflow-y: hidden; width: 100%;}
+.dalaba-tab-container::-webkit-scrollbar { display: none; }
+.dalaba-tab-panel { /*width: 700px;*/ height: 100%; white-space: nowrap;}
+.dalaba-tab-button { position: absolute; }
+.dalaba-tab-prev, .dalaba-tab-next, .dalaba-tab-add{width: 20px; height: 30px;}
+.dalaba-tab-prev button, .dalaba-tab-next button, .dalaba-tab-add button { background: none; width: 100%; border: none; font-size: 10px; color: hsl(0, 0%, 100%); transform: scale(0.75) translate(-4px, -4px);}
+.dalaba-tab-prev { background-color: hsl(223, 53%, 23%); }
+.dalaba-tab-content { display: flex; flex: 1;}
+.dalaba-tab-item { min-width: 60px; max-width:250px; font-family: "PingFang SC", Arial; font-size: 12px; padding: 0 10px; line-height: 25px; border-right: 1px solid hsla(218, 100%, 58%, 0.3); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+

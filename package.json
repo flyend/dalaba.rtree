@@ -1,0 +1,29 @@
+{
+  "name": "dalaba.rtree",
+  "version": "0.0.1",
+  "description": "Rtree implementation based on point selection.",
+  "main": "dist/dalaba.rtree.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/flyend/dalaba.rtree.git"
+  },
+  "scripts": {
+    "start": "gulp"
+  },
+  "files": [
+    "dist/dalaba.rtree.js"
+  ],
+  "contributors": [
+    { "name": "flyend", "email": "flyend@126.com" }
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "3.9.0",
+    "connect-modrewrite": "0.10.1",
+    "gulp-connect": "5.0.0",
+    "gulp-watch": "4.3.5",
+    "gulp-rename": "1.2.2",
+    "gulp-header": "1.8.8",
+    "src-import-curt": "0.0.4"
+  }
+}
