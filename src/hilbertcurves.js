@@ -1,5 +1,4 @@
 (function () {
-    // A Hilbert space-filling curve
     function interleave (x) {
         x = (x | (x << 8)) & 0x00FF00FF;
         x = (x | (x << 4)) & 0x0F0F0F0F;
@@ -14,6 +13,15 @@
         x = (x | (x << 1)) & 0x55555555;
         return x;
     }
+    // z-order of a point to coords
+    function zOrder (x, y) {
+        x = interleave(x);
+        y = deinterleave(y);
+
+        return (x | (y << 1)) >>> 0;
+    }
+
+    // A Hilbert space-filling curve
     function hilbert (x, y) {
         var a = x ^ y;
         var b = 0xFFFF ^ a;
@@ -52,10 +60,8 @@
         i0 = x ^ y;
         i1 = b | (0xFFFF ^ (i0 | a));
 
-        i0 = interleave(i0);
-        i1 = deinterleave(i1);
-
-        return ((i1 << 1) | i0) >>> 0;
+        // Z曲线空间填充 https://en.wikipedia.org/wiki/Z-order_curve
+        return zOrder(i0, i1);
     }
     return hilbert;
 })();

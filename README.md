@@ -1,6 +1,9 @@
 # dalaba-rtree
 基于坐标点选择的R-Tree实现，使用hilbertcurve打包xy坐标
 
+### Demos
+Point selelct of DOMElements https://codepen.io/flyend/pen/OJPVRrN
+
 ### Installing
 R-Tree依赖基础dalaba框架. 应首先加载dalaba.js，HTML的script在打包后的dist目录中引用最新版本 ```dalaba.js``` 和```dalaba.rtree.js```:
 ```html
@@ -50,3 +53,8 @@ npm install
 npm start
 ```
 * Push to your local fork and make your pull request
+
+
+### Reference
+https://en.wikipedia.org/wiki/R-tree
+https://en.wikipedia.org/wiki/Z-order_curve
